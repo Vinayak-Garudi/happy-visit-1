@@ -1,12 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import { useAuth0 } from '@auth0/auth0-react';
+import Map from '../components/Map/Map';
+import List from '../components/List/List';
+import PlaceDetails from '../components/PlaceDetails/PlaceDetails';
+import { Grid } from '@material-ui/core';
+import { Autocomplete } from '@react-google-maps/api';
+import { AppBar, Toolbar, Typography, InputBase, Box } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+import useStyles from '../components/HomeStyle';
+
+
+
 
 const Home = () => {
-  // const { isAuthenticated } = useAuth0();
+  const classes = useStyles();
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      {/* <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
 
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -32,7 +42,30 @@ const Home = () => {
           </ul>
 
         </div>
-      </nav>
+      </nav> */}
+
+      <AppBar position="static">
+        <Toolbar className={classes.Toolbar}>
+          <Typography variant="h5" className={classes.title}>
+            Happy-Visit
+          </Typography>
+          <Box display="flex">
+            <Typography variant="h6" className={classes.title}>
+              Explore new places
+            </Typography>
+            {/* <Autocomplete> */}
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase placeholder="Search..." classes={{ root: classes.inputRoot, input: classes.inputInput }} />
+            </div>
+            {/* </Autocomplete> */}
+          </Box>
+        </Toolbar>
+      </AppBar>
+
+      <br /> <br />
 
       <div>
         <Link className="Trekking" to={"/trekking"}>Trekking</Link>
@@ -52,6 +85,17 @@ const Home = () => {
       <div>
         <Link className="BeachTour" to={"/beachtour"}>Beach Tour</Link>
       </div>
+      <br /> <br /> <br />
+
+      {/* <CssBaseline /> */}
+      <Grid container spacing={3} style={{ width: '100%' }}>
+        <Grid item xs={12} md={4}>
+          <List />
+        </Grid>
+        <Grid item xs={12} md={8}>
+          <Map />
+        </Grid>
+      </Grid>
     </>
   );
 };
